@@ -17,17 +17,20 @@ export default Controller.extend({
     password: '',
     actions: {
         accountLogin() {
-            let that = this
-            this.login_service.accountLogin(this.account, this.password).then(res => {
-                that.token.resetData(res['token'])
-                that.set('errorInfo', false);
-                // return that.store.find('brands', that.token.brandId) // TODO: 缓存机制
-                that.toast.success('', '登陆成功', that.toastOptions);
-                that.transitionToRoute('file');
-            }).catch(err => {
-                // TODO: 错误处理  
-                that.toast.error('', err, that.toastOptions);
-            })
+            this.toast.success('', '登陆成功', this.toastOptions);
+            this.transitionToRoute('file');
+            // let that = this
+            // this.login_service.accountLogin(this.account, this.password).then(res => {
+            //     that.token.resetData(res['token'])
+            //     that.set('errorInfo', false);
+            //     // return that.store.find('brands', that.token.brandId) // TODO: 缓存机制
+            //     that.toast.success('', '登陆成功', that.toastOptions);
+            //     that.transitionToRoute('file');
+            // }).catch(() => {
+            //     // TODO: 错误处理  
+            //     that.set('errorInfo', true);
+            //     that.toast.error('', '登陆失败', that.toastOptions);
+            // })
         }
     },
 });
