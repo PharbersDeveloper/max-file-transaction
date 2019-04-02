@@ -1,1 +1,20 @@
-{{outlet}}
+{{#bp-layout direction='row' main='center' classNames='login-page-warper'}}
+    {{#bp-layout direction='row' classNames='login-page'}}
+        {{#bp-layout direction='col' main='center' classNames='login-area'}}
+            <p class="title">欢迎</p>
+            <p class="subtitle">面向未来教育、迈向新生时代</p>
+            {{#if errorInfo}}
+                {{#bp-layout direction='row' class='error-line'}}
+                    <img class="error" src={{model.errorImg}} alt="">
+                    <p class="error-info">用户名或密码错误</p>
+                {{/bp-layout}}
+            {{/if}}
+            {{bmform/bm-edit-line accountInput=true notitlt=true pholder='用户名' inputVal=account classNames=''}}
+            {{bmform/bm-edit-line passwordInput=true notitlt=true pholder='密码' inputVal=password classNames=''}}
+            <button type="button" name="button" class='login-button' {{action 'accountLogin'}}>登录</button>
+        {{/bp-layout}}
+        {{#bp-layout direction='col' main='center' classNames='img-area'}}
+            <img src="/images/img_login.png" alt="">
+        {{/bp-layout}}
+    {{/bp-layout}}
+{{/bp-layout}}
