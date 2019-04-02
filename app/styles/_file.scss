@@ -1,5 +1,11 @@
 .file-container {
     background-color: #fafbfc;
+    .text-title {
+        @extend %title;
+    }
+    .text-p-small {
+        @extend %p-small;
+    }
 }
 .stall-point-table {
     & thead th {
