@@ -1,1 +1,45 @@
+{{#bp-layout direction="col" classNames='p-4 file-container'}}
+    {{#bp-layout direction='row'}}
+        <p class="">返回</p>
+    {{/bp-layout}}
+    {{#bp-layout direction='row' main='between' cross='center' classNames='bg-white p-4 mt-4 mb-4'}}
+        <p class="">文件管理</p>
+        {{!-- <input type="file" name="" value="" classNames='p-btn primary'> --}}
+        {{#bp-button type="primary"}}上传文件{{/bp-button}}
+    {{/bp-layout}}
+    {{#bp-layout direction='col' classNames='table-area'}}
+        <table class="table stall-point-table bg-white">
+            <thead class="table-head">
+                <th>文件名称</th>
+                <th>修改时间</th>
+                <th>描述</th>
+                <th>操作</th>
+            </thead>
+            <tbody class="table-body">
+                <tr local-class="title m-2">
+                    <td>
+                        {{#bp-layout cross="center"}}
+                    		<img src={{imgSrc}} alt="">
+                    		<span class="ml-2 name">Document-1</span>
+                    	{{/bp-layout}}
+                    </td>
+                    <td>2019-04-02</td>
+                    <td>我是一句文件描述</td>
+                    <td><img src={{imgSrc}} alt=""></td>
+                </tr>
+                <tr local-class="title m-2">
+                    <td>
+                        {{#bp-layout cross="center"}}
+                    		<img src={{imgSrc}} alt="">
+                    		<span class="ml-2 name">{{name}}</span>
+                    	{{/bp-layout}}
+                    </td>
+                    <td>2019-04-02</td>
+                    <td>我是一句文件描述</td>
+                    <td><img src={{imgSrc}} alt=""></td>
+                </tr>
+            </tbody>
+        </table>
+    {{/bp-layout}}
+{{/bp-layout}}
 {{outlet}}
