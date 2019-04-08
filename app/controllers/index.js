@@ -17,6 +17,7 @@ export default Controller.extend({
     password: '',
     actions: {
         accountLogin() {
+			console.log("test"+this.account)
             this.toast.success('', '登陆成功', this.toastOptions);
             this.transitionToRoute('file');
             // let that = this
