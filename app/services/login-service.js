@@ -1,7 +1,5 @@
 import Service from '@ember/service';
-// import { inject as service } from '@ember/service';
 import $ from 'jquery';
-// import { reject } from 'rsvp';
 
 /*
 md5.js
@@ -115,14 +113,14 @@ String.prototype.MD5 = function (bit) {
 		S42 = 10,
 		S43 = 15,
 		S44 = 21;
-	// Steps 1 and 2. Append padding bits and length and convert to words 
+	// Steps 1 and 2. Append padding bits and length and convert to words
 	x = ConvertToWordArray(sMessage);
-	// Step 3. Initialise 
+	// Step 3. Initialise
 	a = 0x67452301;
 	b = 0xEFCDAB89;
 	c = 0x98BADCFE;
 	d = 0x10325476;
-	// Step 4. Process the message in 16-word blocks 
+	// Step 4. Process the message in 16-word blocks
 	for (k = 0; k < x.length; k += 16) {
 		AA = a;
 		BB = b;
@@ -210,7 +208,8 @@ export default Service.extend({
 
         let tmp = {
             account: a,
-            password: p.MD5(32)
+            // password: p.MD5(32)
+			password: p
         }
 
         let dt = JSON.stringify(tmp);
