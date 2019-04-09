@@ -1,9 +1,12 @@
 {{#bp-layout direction="col" classNames='p-4 file-container'}}
     {{#bp-layout direction='row'}}
         {{!-- <p class="text-p-small">返回</p> --}}
-        {{#link-to 'index' classNames='text-p-small'}}
+        {{!-- {{#link-to 'index' classNames='text-p-small' }}
             返回
-        {{/link-to}}
+        {{/link-to}} --}}
+		{{#bp-button type="link-subtle" click=(action 'signOut') classNames=""}}
+            返回
+    	{{/bp-button}}
     {{/bp-layout}}
     {{#bp-layout direction='row' main='between' cross='center' classNames='bg-white p-4 mt-4 mb-4'}}
         <p class="text-title">文件管理</p>

@@ -26,39 +26,19 @@ export default Service.extend({
         return value
     }),
 
-    brandId: computed('allCookies', function(){
-        let value = ''
-        for (let idx = 0; idx < this.allCookies.length; idx++) {
-            let tmp = this.allCookies[idx]
-            if (tmp.name == 'brand-id') {
-                value = tmp.value
-            } 
-        }
-
-        if (value.length > 0) {
-            localStorage.setItem('brandid', value)
-        } 
-        return value
-    }),
-
     bearerToken: computed('token', function(){
         return 'bearer ' + localStorage.getItem('token')
     }),
 
-    resetData(t, bid) {
+    resetData(t) {
         this.set('token', t)
-        this.set('brandId', bid)
         this.cookies.write('token', t) // TODO: add options
         localStorage.setItem('token', t)
-        this.cookies.write('brand-id', bid) // TODO: add options
-        localStorage.setItem('brandid', bid)
         this.refreshCookies()
     },
 
     clearToken() {
         this.set('token', '')
-        // this.set('brandId', '')
-        // this.cookies.clear("brand-id")
         this.cookies.clear("token")
         this.cookies.clear("now")
     },
