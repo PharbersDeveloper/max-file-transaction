@@ -40,6 +40,13 @@ export default Controller.extend({
 				window.console.log("get file error")
 			}
 		},
+
+		signOut() {
+			let that = this;
+			localStorage.clear('account')
+			window.console.log("test the log out: "+ localStorage.getItem("account"))
+			that.transitionToRoute('index');
+		},
 		
 		download(param) {
 			let accept = param.accept;
