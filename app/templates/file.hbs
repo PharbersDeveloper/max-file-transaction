@@ -8,8 +8,13 @@
     {{#bp-layout direction='row' main='between' cross='center' classNames='bg-white p-4 mt-4 mb-4'}}
         <p class="text-title">文件管理</p>
         {{#bp-layout direction='row'}}
-            <input type="file" name="file" id="file" class="inputfile" {{action 'uploadFile'}}/>
-            <label for="file">上传文件</label>
+			<div>
+				<input type="file" name="file" id="file" onchange={{action 'uploadFile'}} value={{tmpFile}} class="inputfile"/>
+            	<label for="file">上传文件</label>		
+			</div>
+			{{!-- <div id="upload" class="upload-file" {{action 'uploadFile'}}>
+				上传文件
+			</div> --}}
         {{/bp-layout}}
     {{/bp-layout}}
     {{#bp-layout direction='col' classNames='table-area'}}
