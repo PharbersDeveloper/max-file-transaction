@@ -12,20 +12,19 @@ export default Controller.extend({
 			let that = this,
 				file = event["target"].files[0],
 				formData = new FormData();
-
+				
 				formData.append('file', file);
-				//reader = new FileReader();
-				console.log(file);
+				window.console.log(file);
 			if(file.size > 0) {
 				that.upload_service.uploadFile(formData)
 				.then(res => {
-					console.log("upload result "+res)	
+					window.console.log("upload result "+res)	
 				})
 				.catch(err => {
-					console.log("upload error "+err)
+					window.console.log("upload error "+err)
 				})
 			} else {
-				console.log("get file error")
+				window.console.log("get file error")
 			}
 		},
 		
