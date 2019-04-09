@@ -31,6 +31,7 @@ export default Controller.extend({
 			let accept = param.accept;
 			let uuid = param.uuid;
 			let client = this.bmOss.get('ossClient');
+
 			// let url = client.signatureUrl(accept+uuid);
 
 		}
