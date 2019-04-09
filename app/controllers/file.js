@@ -52,8 +52,16 @@ export default Controller.extend({
 			let accept = param.accept;
 			let uuid = param.uuid;
 			let client = this.bmOss.get('ossClient');
+			let url = client.signatureUrl(accept+uuid);
 
-			// let url = client.signatureUrl(accept+uuid);
+		    var a = document.createElement('a');
+		    a.download = param.name;
+			a.style.display = 'none';
+			var blob = new Blob([url]);
+		    a.href = URL.createObjectURL(blob);
+		    document.body.appendChild(a);
+		    a.click();
+			document.body.removeChild(a);
 
 		}
 	},
