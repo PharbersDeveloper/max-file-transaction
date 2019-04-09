@@ -3,8 +3,8 @@ import { computed } from '@ember/object';
 
 export default Service.extend({
 
-    aid: 'LTAINO7wSDoWJRfN',
-    asec: 'PcDzLSOE86DsnjQn8IEgbaIQmyBzt6',
+    aid: 'LTAIEoXgk4DOHDGi',
+    asec: 'x75sK6191dPGiu9wBMtKE6YcBBh8EI',
     ossClient: computed(function(){
         return new OSS({
             region: 'oss-cn-beijing',
@@ -12,7 +12,7 @@ export default Service.extend({
             accessKeyId: this.aid,
             accessKeySecret: this.asec,
             // stsToken: this.stsToken,
-            bucket: 'bmsass'
+            bucket: 'pharbers-max-bi'
           });
     }),
 });

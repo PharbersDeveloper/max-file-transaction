@@ -15,7 +15,17 @@ export default Controller.extend({
 	files: computed('isRefresh', function()	{
 		return this.store.query('file', { 'accept': localStorage.getItem("account")})
 	}),
-
+	downloadURI(uri, name) {
+		  var link = document.createElement("a");
+		  link.download = name;
+		  var blob = new Blob([uri]);
+		  link.href =  URL.createObjectURL(blob);
+		  // link.href = uri;
+		  document.body.appendChild(link);
+		  link.click();
+		  document.body.removeChild(link);
+		  // delete link;
+	},
 	actions: {
 		uploadFile(event) {
 			let that = this,
@@ -29,7 +39,7 @@ export default Controller.extend({
 				.then(res => {
 					that.toast.success('', '上传成功', that.toastOptions);
 					that.toggleProperty("isRefresh")
-					window.console.log("upload result "+res)	
+					window.console.log("upload result "+res)
 				})
 				.catch(err => {
 					that.toast.error('', '上传失败', that.toastOptions);
@@ -40,21 +50,27 @@ export default Controller.extend({
 				window.console.log("get file error")
 			}
 		},
-		
+
+
 		download(param) {
+
 			let accept = param.accept;
 			let uuid = param.uuid;
 			let client = this.bmOss.get('ossClient');
-			let url = client.signatureUrl(accept+uuid);
+			let url = client.signatureUrl(accept + '/' + uuid);
+			window.console.log(url)
 
-		    var a = document.createElement('a');
-		    a.download = param.name;
-			a.style.display = 'none';
-			var blob = new Blob([url]);
-		    a.href = URL.createObjectURL(blob);
-		    document.body.appendChild(a);
-		    a.click();
-			document.body.removeChild(a);
+			this.downloadURI(url, param.name)
+
+		    // var a = document.createElement('a');
+		    // a.download = param.name;
+			// a.style.display = 'none';
+			// var blob = new Blob([url]);
+		    // a.href = URL.createObjectURL(blob);
+		    // document.body.appendChild(a);
+			// 			debugger
+		    // a.click();
+			// document.body.removeChild(a);
 
 		}
 	},
