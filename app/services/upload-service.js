@@ -3,11 +3,7 @@ import $ from 'jquery';
 
 export default Service.extend({
 	uploadFile(file) {
-		//console.log("in the service: " + file.length);
-		console.log("%%%%%%%")
-		//let dt = JSON.stringify(file);
 		return new Promise(function(resolve, reject){
-			console.log("^^^^^^^^")
 			$.ajax({
 				method: 'POST',
 				url: '/v2/UploadToOss?accept=nhwa&des=前端测试',
@@ -15,7 +11,7 @@ export default Service.extend({
 				processData: false,
 				contentType: false,
                 success: function(res) {
-					console.log(res);
+					window.console.log(res);
                     return new Promise(function(){
                         if (res.status == 'error') {
                             reject(res.error)
@@ -25,7 +21,7 @@ export default Service.extend({
                     })
                 },
                 error: function(err) {
-					console.log(err)
+					window.console.log(err)
                     reject(err)
                 },
 			})
