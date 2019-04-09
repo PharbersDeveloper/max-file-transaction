@@ -16,16 +16,32 @@ export default Controller.extend({
 	files: computed('isRefresh', function()	{
 		return this.store.query('file', { 'accept': localStorage.getItem("account")})
 	}),
-	downloadURI(uri, name) {
-		  var link = document.createElement("a");
-		  link.download = name;
-		  var blob = new Blob([uri]);
-		  link.href =  URL.createObjectURL(blob);
-		  // link.href = uri;
-		  document.body.appendChild(link);
-		  link.click();
-		  document.body.removeChild(link);
+	downloadURI(url, name) {
+		  // var link = document.createElement("a");
+		  // link.download = name;
+		  // link.href = url;
+		  // document.body.appendChild(link);
+		  // link.click();
+		  // document.body.removeChild(link);
 		  // delete link;
+
+		fetch(url).then(response => {
+			if( response.status == 200 )
+                return response.blob()
+            throw new Error(`status: ${response.status}`)
+		}).then(blob => {
+				var link = document.createElement("a");
+				link.download = name;
+				// var blob = new Blob([response]);
+				link.href =  URL.createObjectURL(blob);
+				// link.href = url;
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+				// delete link;
+		}).catch(error=> {
+		   console.log("failed. cause:", error)
+		})
 	},
 	actions: {
 		uploadFile(event) {
@@ -58,7 +74,6 @@ export default Controller.extend({
 			window.console.log("test the log out: "+ localStorage.getItem("account"));
 			that.transitionToRoute('index');
 		},
-		
 		download(param) {
 
 			let accept = param.accept;
@@ -68,17 +83,6 @@ export default Controller.extend({
 			window.console.log(url)
 
 			this.downloadURI(url, param.name)
-
-		    // var a = document.createElement('a');
-		    // a.download = param.name;
-			// a.style.display = 'none';
-			// var blob = new Blob([url]);
-		    // a.href = URL.createObjectURL(blob);
-		    // document.body.appendChild(a);
-			// 			debugger
-		    // a.click();
-			// document.body.removeChild(a);
-
 		}
 	},
 });
