@@ -11,6 +11,7 @@ export default Controller.extend({
         timeOut: '2000',
     }),
 	bmOss: service(),
+	token: service(),
 	isRefresh: false,
 	files: computed('isRefresh', function()	{
 		return this.store.query('file', { 'accept': localStorage.getItem("account")})
@@ -43,8 +44,8 @@ export default Controller.extend({
 
 		signOut() {
 			let that = this;
-			localStorage.clear('account')
-			window.console.log("test the log out: "+ localStorage.getItem("account"))
+			that.token.clearAllCache();
+			window.console.log("test the log out: "+ localStorage.getItem("account"));
 			that.transitionToRoute('index');
 		},
 		

@@ -25,7 +25,9 @@ export default Controller.extend({
                 that.set('errorInfo', false);
                 // return that.store.find('brands', that.token.brandId) // TODO: 缓存机制
                 localStorage.setItem('account', res.account);
-                that.toast.success('', '登陆成功', that.toastOptions);
+				that.toast.success('', '登陆成功', that.toastOptions);
+				that.set('account', '');
+				that.set('password', '');
                 that.transitionToRoute('file');
             }).catch(() => {
                 // TODO: 错误处理
