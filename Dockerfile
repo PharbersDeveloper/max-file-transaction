@@ -19,9 +19,9 @@ RUN npm update && \
 
 WORKDIR /app
 
-LABEL ipaas.version=0.0.0
+LABEL ipaas.version=0.0.1
 
-RUN git clone https://github.com/AlfredYang1986/bm-data-ipaas.git && \
+RUN git clone https://github.com/PharbersDeveloper/max-file-transaction.git && \
 	git clone https://github.com/PharbersDeveloper/BP-Components.git 
 	
 WORKDIR /app/BP-Components
@@ -30,7 +30,7 @@ RUN git checkout -b frank origin/frank && \
 	npm install && \
 	npm link
 
-WORKDIR /app/bm-data-ipaas
+WORKDIR /app/max-file-transaction
 
 RUN npm install && \
 	npm link bp-components && \
