@@ -17,14 +17,6 @@ export default Controller.extend({
 		return this.store.query('file', { 'accept': localStorage.getItem("account")})
 	}),
 	downloadURI(url, name) {
-		  // var link = document.createElement("a");
-		  // link.download = name;
-		  // link.href = url;
-		  // document.body.appendChild(link);
-		  // link.click();
-		  // document.body.removeChild(link);
-		  // delete link;
-
 		fetch(url).then(response => {
 			if( response.status == 200 )
                 return response.blob()
@@ -40,7 +32,7 @@ export default Controller.extend({
 				document.body.removeChild(link);
 				// delete link;
 		}).catch(error=> {
-		   console.log("failed. cause:", error)
+			window.console.log("failed. cause:", error)
 		})
 	},
 	actions: {
@@ -48,7 +40,6 @@ export default Controller.extend({
 			let that = this,
 				file = event["target"].files[0],
 				formData = new FormData();
-
 				formData.append('file', file);
 				window.console.log(file);
 			if(file.size > 0) {
