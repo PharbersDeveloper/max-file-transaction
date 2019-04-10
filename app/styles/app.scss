@@ -3,6 +3,7 @@
 
 //Routes
 @import 'index';
+@import 'file';
 
 html,
 body {
@@ -61,5 +62,3 @@ p {
         }
     }
 }
-
-@import 'file';
