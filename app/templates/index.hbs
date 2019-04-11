@@ -1,4 +1,4 @@
-{{#bp-layout direction='row' main='center' classNames='login-page-warper'}}
+{{!-- {{#bp-layout direction='row' main='center' classNames='login-page-warper'}}
     {{#bp-layout direction='row' classNames='login-page'}}
         {{#bp-layout direction='row' main="center" classNames='login-sub-container'}}
             {{#bp-layout direction='col' main='center' classNames='login-area'}}
@@ -11,7 +11,6 @@
                     {{/bp-layout}}
                 {{/if}}
                 {{bp-input placeholder="账号" value=account size='large' classNames='mb-2'}}
-                {{!-- {{input type='password' placeholder='密码' value=password classNames='mb-3 password-input'}} --}}
 
                 {{bp-input placeholder="密码" type='password' value=password size='large' classNames='mb-3'}}
                 {{#bp-button type="primary" click=(action 'accountLogin') classNames=""}}
@@ -25,4 +24,5 @@
             {{/bp-layout}}
         {{/bp-layout}}
     {{/bp-layout}}
-{{/bp-layout}}
+{{/bp-layout}} --}}
+{{outlet}}
