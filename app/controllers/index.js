@@ -1,9 +1,7 @@
 import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
-import EmberObject from '@ember/object';
 
 export default Controller.extend({
-	
+
     // login_service: service(),
     // token: service(),
     // toast: service(),

@@ -8,7 +8,6 @@ export default Route.extend({
 	clientSecret: '5c90db71eeefcc082c0823b2',
 	redirectUri: 'http://192.168.100.177:4200/oauth-callback',
     beforeModel(transition) {
-		debugger
 		let version = 'v0',
 			resource = 'GenerateAccessToken',
 			scope = 'Pharbers',
@@ -37,7 +36,6 @@ export default Route.extend({
                         // path: '/'
                         expires: expiry
                     }
-
 					cookies.write('token', response.access_token, options);
 					cookies.write('account_id', response.account_id, options);
 					// cookies.write('account_id', '5c4552455ee2dd7c36a94a9e');
