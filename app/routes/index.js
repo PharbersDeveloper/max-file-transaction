@@ -12,10 +12,11 @@ export default Route.extend({
     //     });
 	// },
 	cookies: service(),
-	clientId: '5caeb116d23dc2064f4891bb', // 5cac3206d23dc25e3bbb1ffe
+	clientId: '5caeafd7d23dc2064f4891ba', // 5cac3206d23dc25e3bbb1ffe
 	clientSecret: '5c90db71eeefcc082c0823b2',
-	redirectUri: 'http://192.168.100.177:4200/oauth-callback',
+	redirectUri: 'http://192.168.200.200:4200/oauth-callback',
 	beforeModel({ targetName }) {
+		console.log("in the index");
 		let cookies = this.get('cookies'),
 			token = cookies.read('token');
 
@@ -34,6 +35,7 @@ export default Route.extend({
 				replace(/\n/gm, '').
 				replace(/ /gm, '').
 				replace(/\t/gm, '');
+			localStorage.setItem('isRedirect', 'false');
 			window.location = [host, version, resource, url].join('/');
 		} else {
             this.transitionTo("file")

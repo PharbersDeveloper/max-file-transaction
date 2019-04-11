@@ -4,10 +4,11 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
     ajax: service(),
 	cookies: service(),
-    clientId: "5caeb116d23dc2064f4891bb",
+    clientId: "5caeafd7d23dc2064f4891ba",
 	clientSecret: '5c90db71eeefcc082c0823b2',
-	redirectUri: 'http://192.168.100.177:4200/oauth-callback',
+	redirectUri: 'http://192.168.200.200:4200/oauth-callback',
     beforeModel(transition) {
+		console.log("in the oauth-callback");
 		let version = 'v0',
 			resource = 'GenerateAccessToken',
 			scope = 'Pharbers',
