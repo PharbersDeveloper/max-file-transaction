@@ -6,11 +6,11 @@ export default Route.extend({
 	cookies: service(),
 	model() {
 		let token = this.get('cookies').read('token');
-		console.log("in the application " + token);
+		window.console.log("in the application " + token);
 		if(token != undefined && token != null) {
-			console.log("test token is get");
+			window.console.log("test token is get");
 		} else {
-			console.log("test token is empty");
+			window.console.log("test token is empty");
 			if(localStorage.getItem('isRedirect') == 'false') {
 				//表示进入index和callback页面
 			} else {

@@ -16,7 +16,7 @@ export default Route.extend({
 	clientSecret: '5c90db71eeefcc082c0823b2',
 	redirectUri: 'http://192.168.200.200:4200/oauth-callback',
 	beforeModel({ targetName }) {
-		console.log("in the index");
+		window.console.log("in the index");
 		let cookies = this.get('cookies'),
 			token = cookies.read('token');
 

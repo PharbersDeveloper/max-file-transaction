@@ -8,7 +8,7 @@ export default Route.extend({
 	clientSecret: '5c90db71eeefcc082c0823b2',
 	redirectUri: 'http://192.168.200.200:4200/oauth-callback',
     beforeModel(transition) {
-		console.log("in the oauth-callback");
+		window.console.log("in the oauth-callback");
 		let version = 'v0',
 			resource = 'GenerateAccessToken',
 			scope = 'Pharbers',
