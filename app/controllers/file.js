@@ -18,10 +18,10 @@ export default Controller.extend({
 	files: computed('isRefresh', function()	{
 		let scope = this.get('cookies').read('scope');
 		let accept;
-		if(scope.indexOf('|') == -1) {
+		if(scope.indexOf('/') == -1) {
 			accept = scope.toLowerCase();
 		} else {
-			accept = scope.split(':')[2].replace(/[\[\]]/g,"").toLowerCase();
+			accept = scope.split(':')[1].replace(/[\[\]]/g,"").toLowerCase();
 		}
 		return this.store.query('file', { 'accept': accept})
 	}),

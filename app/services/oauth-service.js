@@ -8,9 +8,9 @@ export default Service.extend({
 
     clientId: "5caeb116d23dc2064f4891bb",
     clientSecret: '5c90db71eeefcc082c0823b2',
-    // redirectUri: 'http://192.168.100.177:4200/oauth-callback',
-    redirectUri: 'http://report.pharbers.com/oauth-callback',
-    scope: "APP/FILEUPANDDOWN",
+    redirectUri: 'http://192.168.100.177:4200/oauth-callback',
+    // redirectUri: 'http://report.pharbers.com/oauth-callback',
+    scope: "APP/FileUpAndDownLoad",
     version: 'v2',
 
     oauthOperation() {
@@ -19,8 +19,8 @@ export default Service.extend({
 
 		if (!token) {
 			let
-                // host = 'http://192.168.100.161:31415',
-                host = 'http://report.pharbers.com',
+                host = 'http://192.168.100.161:31415',
+                // host = 'http://report.pharbers.com',
 				version = `${this.get('version')}`,
 				resource = 'GenerateUserAgent',
 				// scope = 'Pharbers',
@@ -64,8 +64,8 @@ export default Service.extend({
 				.then(response => {
                     let expiry = new Date(response.expiry);
                     let options = {
-                        domain: '.pharbers.com',
-                        path: '/',
+                        // domain: '.pharbers.com',
+                        // path: '/',
                         expires: expiry
                     }
                     // let options2 = {
