@@ -20,7 +20,7 @@ export default Service.extend({
 		if (!token) {
 			let
                 // host = 'http://192.168.100.161:31415',
-                host = 'http://report.pharbers.com',
+                host = 'http://report:8081',
 				version = `${this.get('version')}`,
 				resource = 'GenerateUserAgent',
 				// scope = 'Pharbers',
