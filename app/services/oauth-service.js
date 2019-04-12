@@ -12,8 +12,6 @@ export default Service.extend({
     scope: "Pharbers",
     version: 'v2',
 
-    haveAuth: false,
-
     oauthOperation() {
         let cookies = this.get('cookies'),
 			token = cookies.read('token');
@@ -32,6 +30,7 @@ export default Service.extend({
 				replace(/\n/gm, '').
 				replace(/ /gm, '').
 				replace(/\t/gm, '');
+            localStorage.setItem('needRedirect', false);
 			window.location = [host, version, resource, url].join('/');
 		} else {
             this.get('router').transitionTo('file');
@@ -74,7 +73,7 @@ export default Service.extend({
 					cookies.write('refresh_token', response.refresh_token, options);
                     cookies.write('token_type', response.token_type, options);
 					// cookies.write('expiry', response.expiry, options);
-                    this.set("haveAuth", true);
+                    localStorage.setItem('needRedirect', true);
 					this.get('router').transitionTo('file');
 				});
 		} else {
@@ -88,7 +87,7 @@ export default Service.extend({
         this.cookies.clear("access_token")
         this.cookies.clear("refresh_token")
         this.cookies.clear("token_type")
-        this.set("haveAuth", false);
+        localStorage.removeItem('needRedirect')
     }
 
 });
