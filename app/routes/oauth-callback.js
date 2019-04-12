@@ -8,19 +8,15 @@ export default Route.extend({
 	clientSecret: '5c90db71eeefcc082c0823b2',
 	redirectUri: 'http://192.168.100.177:4200/oauth-callback',
     beforeModel(transition) {
-		window.console.log("in the oauth-callback");
-		let version = 'v0',
+		let version = 'v2',
 			resource = 'GenerateAccessToken',
 			scope = 'Pharbers',
 			url = '',
 			cookies = this.get('cookies');
-
 		const ajax = this.get('ajax'),
-			{ queryParams } = transition;
-
+			{ queryParams } = transition,
 		if (queryParams.code && queryParams.state) {
-			url = `?response_type=authorization_code
-					&client_id=${this.get('clientId')}
+			url = `?client_id=${this.get('clientId')}
 					&client_secret=${this.get('clientSecret')}
 					&scope=${scope}
 					&redirect_uri=${this.get('redirectUri')}
@@ -44,6 +40,7 @@ export default Route.extend({
 					cookies.write('refresh_token', response.refresh_token, options);
 					cookies.write('expiry', response.expiry, options);
 					cookies.write('token_type', response.token_type, options);
+                    localStorage.setItem('isRedirect', 'true');
 					this.transitionTo('file');
 				});
 		} else {

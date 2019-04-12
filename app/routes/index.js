@@ -19,16 +19,15 @@ export default Route.extend({
 		window.console.log("in the index");
 		let cookies = this.get('cookies'),
 			token = cookies.read('token');
-
 		if (!token && targetName !== 'oauth-callback') {
-			let host = 'http://192.168.100.116:31416',
-				version = 'v0',
+			// let host = 'http://192.168.100.116:31416',
+            let host = 'http://192.168.100.161:31415',
+				version = 'v2',
 				resource = 'GenerateUserAgent',
 				scope = 'Pharbers',
 				url = '';
 
-			url = `?response_type=code
-                        &client_id=${this.get('clientId')}
+			url = `?client_id=${this.get('clientId')}
                         &client_secret=${this.get('clientSecret')}
                         &scope=${scope}
 						&redirect_uri=${this.get('redirectUri')}`.

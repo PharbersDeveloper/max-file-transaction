@@ -14,7 +14,7 @@ export default Controller.extend({
 	token: service(),
 	isRefresh: false,
 	files: computed('isRefresh', function()	{
-		return this.store.query('file', { 'accept': localStorage.getItem("account")})
+		return this.store.query('file', { 'accept': 'nhwa'})
 	}),
 	downloadURI(url, name) {
 		fetch(url).then(response => {
