@@ -3,6 +3,8 @@ import { inject as service } from '@ember/service';
 import EmberObject, { computed } from '@ember/object';
 
 export default Controller.extend({
+	bmOss: service(),
+	oauth_service: service(),
 	upload_service: service(),
 	toastOptions: EmberObject.create({
         closeButton: false,
@@ -10,8 +12,7 @@ export default Controller.extend({
         progressBar: false,
         timeOut: '2000',
     }),
-	bmOss: service(),
-	token: service(),
+	// token: service(),
 	isRefresh: false,
 	files: computed('isRefresh', function()	{
 		return this.store.query('file', { 'accept': 'nhwa'})
@@ -60,10 +61,7 @@ export default Controller.extend({
 		},
 
 		signOut() {
-			let that = this;
-			that.token.clearAllCache();
-			window.console.log("test the log out: "+ localStorage.getItem("account"));
-			that.transitionToRoute('index');
+			this.oauth_service.removeAuth();
 		},
 		download(param) {
 
