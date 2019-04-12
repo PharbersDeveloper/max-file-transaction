@@ -10,7 +10,7 @@ export default Service.extend({
     clientSecret: '5c90db71eeefcc082c0823b2',
     // redirectUri: 'http://192.168.100.177:4200/oauth-callback',
     redirectUri: 'http://report.pharbers.com/oauth-callback',
-    scope: "Pharbers",
+    scope: "APP:[MAX]",
     version: 'v2',
 
     oauthOperation() {
@@ -18,7 +18,8 @@ export default Service.extend({
 			token = cookies.read('token');
 
 		if (!token) {
-			let // host = 'http://192.168.100.161:31415',
+			let
+                // host = 'http://192.168.100.161:31415',
                 host = 'http://report.pharbers.com',
 				version = `${this.get('version')}`,
 				resource = 'GenerateUserAgent',
@@ -41,9 +42,8 @@ export default Service.extend({
 
     oauthCallback(transition) {
         window.console.log("in the oauth-callback");
-		let version = 'v2',
+		let version = `${this.get('version')}`,
 			resource = 'GenerateAccessToken',
-			// scope = 'fileTrans',
 			url = '',
 			cookies = this.get('cookies');
 
@@ -78,6 +78,7 @@ export default Service.extend({
 					cookies.write('access_token', response.access_token, options);
 					cookies.write('refresh_token', response.refresh_token, options);
                     cookies.write('token_type', response.token_type, options);
+                    cookies.write('scope', response.scope, options);
 					// cookies.write('expiry', response.expiry, options);
                     localStorage.setItem('needRedirect', true);
 					this.get('router').transitionTo('file');
