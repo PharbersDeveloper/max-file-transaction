@@ -10,7 +10,7 @@ export default Service.extend({
     clientSecret: '5c90db71eeefcc082c0823b2',
     // redirectUri: 'http://192.168.100.177:4200/oauth-callback',
     redirectUri: 'http://report.pharbers.com/oauth-callback',
-    scope: "APP:[MAX]",
+    scope: "APP/FILEUPANDDOWN",
     version: 'v2',
 
     oauthOperation() {
