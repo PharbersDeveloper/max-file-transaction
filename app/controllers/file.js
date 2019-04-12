@@ -4,6 +4,7 @@ import EmberObject, { computed } from '@ember/object';
 
 export default Controller.extend({
 	bmOss: service(),
+	cookies: service(),
 	oauth_service: service(),
 	upload_service: service(),
 	toastOptions: EmberObject.create({
@@ -15,7 +16,14 @@ export default Controller.extend({
 	// token: service(),
 	isRefresh: false,
 	files: computed('isRefresh', function()	{
-		return this.store.query('file', { 'accept': 'nhwa'})
+		let scope = this.get('cookies').read('scope');
+		let accept;
+		if(scope.indexOf('|') == -1) {
+			accept = scope.toLowerCase();
+		} else {
+			accept = scope.split(':')[2].replace(/[\[\]]/g,"").toLowerCase();
+		}
+		return this.store.query('file', { 'accept': accept})
 	}),
 	downloadURI(url, name) {
 		fetch(url).then(response => {
