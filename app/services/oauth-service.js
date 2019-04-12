@@ -4,11 +4,13 @@ import { inject as service } from '@ember/service';
 export default Service.extend({
     cookies: service(),
     ajax: service(),
+    router: service(),
 
     clientId: "5caeb116d23dc2064f4891bb",
     clientSecret: '5c90db71eeefcc082c0823b2',
     redirectUri: 'http://192.168.100.177:4200/oauth-callback',
     scope: "Pharbers",
+    version: 'v2',
 
     haveAuth: false,
 
@@ -17,14 +19,13 @@ export default Service.extend({
 			token = cookies.read('token');
 
 		if (!token) {
-			let host = 'http://192.168.100.116:31416',
-				version = 'v0',
+			let host = 'http://192.168.100.161:31415',
+				version = `${this.get('version')}`,
 				resource = 'GenerateUserAgent',
 				// scope = 'Pharbers',
 				url = '';
 
-			url = `?response_type=code
-                        &client_id=${this.get('clientId')}
+			url = `?client_id=${this.get('clientId')}
                         &client_secret=${this.get('clientSecret')}
                         &scope=${this.get('scope')}
 						&redirect_uri=${this.get('redirectUri')}`.
@@ -33,13 +34,13 @@ export default Service.extend({
 				replace(/\t/gm, '');
 			window.location = [host, version, resource, url].join('/');
 		} else {
-            this.transitionTo("file")
+            this.get('router').transitionTo('file');
         }
     },
 
     oauthCallback(transition) {
         window.console.log("in the oauth-callback");
-		let version = 'v0',
+		let version = 'v2',
 			resource = 'GenerateAccessToken',
 			// scope = 'fileTrans',
 			url = '',
@@ -49,8 +50,7 @@ export default Service.extend({
 			{ queryParams } = transition;
 
 		if (queryParams.code && queryParams.state) {
-			url = `?response_type=authorization_code
-					&client_id=${this.get('clientId')}
+			url = `?client_id=${this.get('clientId')}
 					&client_secret=${this.get('clientSecret')}
 					&scope=${this.get('scope')}
 					&redirect_uri=${this.get('redirectUri')}
@@ -68,17 +68,17 @@ export default Service.extend({
                         expires: expiry
                     }
                     cookies.write('token', response.access_token, options);
-                    
+
 					cookies.write('account_id', response.account_id, options);
 					cookies.write('access_token', response.access_token, options);
 					cookies.write('refresh_token', response.refresh_token, options);
                     cookies.write('token_type', response.token_type, options);
 					// cookies.write('expiry', response.expiry, options);
                     this.set("haveAuth", true);
-					this.transitionTo('file');
+					this.get('router').transitionTo('file');
 				});
 		} else {
-			this.transitionTo('file');
+			this.get('router').transitionTo('file');
 		}
     },
 
@@ -90,5 +90,5 @@ export default Service.extend({
         this.cookies.clear("token_type")
         this.set("haveAuth", false);
     }
-    
+
 });
