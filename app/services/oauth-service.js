@@ -8,7 +8,8 @@ export default Service.extend({
 
     clientId: "5caeb116d23dc2064f4891bb",
     clientSecret: '5c90db71eeefcc082c0823b2',
-    redirectUri: 'http://192.168.100.177:4200/oauth-callback',
+    // redirectUri: 'http://192.168.100.177:4200/oauth-callback',
+    redirectUri: 'http://report.pharbers.com/oauth-callback',
     scope: "Pharbers",
     version: 'v2',
 
@@ -17,7 +18,8 @@ export default Service.extend({
 			token = cookies.read('token');
 
 		if (!token) {
-			let host = 'http://192.168.100.161:31415',
+			let // host = 'http://192.168.100.161:31415',
+                host = 'http://report.pharbers.com',
 				version = `${this.get('version')}`,
 				resource = 'GenerateUserAgent',
 				// scope = 'Pharbers',
@@ -62,10 +64,14 @@ export default Service.extend({
 				.then(response => {
                     let expiry = new Date(response.expiry);
                     let options = {
-                        // domain: '.pharbers.com',
-                        // path: '/'
+                        domain: '.pharbers.com',
+                        path: '/',
                         expires: expiry
                     }
+                    // let options2 = {
+                    //     domain: '.pharbers.com',
+                    //     path: '/'
+                    // }
                     cookies.write('token', response.access_token, options);
 
 					cookies.write('account_id', response.account_id, options);
