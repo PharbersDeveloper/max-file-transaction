@@ -10,12 +10,11 @@ export default Service.extend({
     clientId: "5cbdac9bf4ce4352ecb082a2",
     clientSecret: '5c90db71eeefcc082c0823b2',
     status: "self",
-    redirectUri: 'http://report.pharbers.com:4201/oauth-callback',
-    host: 'http://192.168.100.116:9097',
     scope: "APP/FileUpAndDownLoad",
-    // redirectUri: 'http://192.168.0.100:4201/oauth-callback',
-    // host: 'http://oauth.pharbers.com',
-    // scope: "APP/FileUpAndDownLoad",
+    redirectUri: 'http://report.pharbers.com/oauth-callback',
+    // redirectUri: 'http://report.pharbers.com:4201/oauth-callback',
+    host: 'http://oauth.pharbers.com',
+    // host: 'http://192.168.100.116:9097',
 
     oauthOperation() {
         const ajax = this.get('ajax')

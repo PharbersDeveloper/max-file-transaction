@@ -21,7 +21,7 @@ export default Controller.extend({
 		if(scope.indexOf('/') == -1) {
 			accept = scope.toLowerCase();
 		} else {
-			accept = scope.split(':')[1].replace(/[\[\]]/g,"").toLowerCase();
+			accept = scope.split(':')[1].replace(/[[\]]/g,"").toLowerCase();
 		}
 		return this.store.query('file', { 'accept': accept})
 	}),
