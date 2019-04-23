@@ -3,16 +3,20 @@ import { inject as service } from '@ember/service'
 
 export default Route.extend({
 	cookies: service(),
-	model() {
-		let token = this.get('cookies').read('token');
-		if(token != undefined && token != null && token != '') {
-			window.console.log("test token is get");
+	oauth_service: service(),
+
+	beforeModel({ targetName }) {
+		window.console.log(targetName);
+		if(targetName === 'oauth-callback') {
+			return;
+		}
+
+		if(this.oauth_service.judgeAuth()) {
+			window.console.log("have auth");
 		} else {
-			if(localStorage.getItem('needRedirect') == 'false') {
-                // 跳转到授权页
-			} else {
-				this.transitionTo('index');
-			}
+			window.console.log("no auth!");
+			this.transitionTo('index');
 		}
 	}
+	
 });

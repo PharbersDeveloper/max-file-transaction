@@ -70,6 +70,7 @@ export default Controller.extend({
 
 		signOut() {
 			this.oauth_service.removeAuth();
+			this.transitionToRoute('index')
 		},
 		download(param) {
 
