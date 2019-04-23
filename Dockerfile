@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y && \
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
 	apt-get install -y nodejs
 
-ENV EMBERVERSION 2.18.2
+ENV EMBERVERSION 3.4.3
 ENV	BOWERVERSION 1.8.4
 
 RUN npm update && \
@@ -19,7 +19,7 @@ RUN npm update && \
 
 WORKDIR /app
 
-LABEL ipaas.version=0.0.1
+LABEL filetransaction.version=0.1.0
 
 RUN git clone https://github.com/PharbersDeveloper/max-file-transaction.git && \
 	git clone https://github.com/PharbersDeveloper/BP-Components.git 
@@ -38,8 +38,8 @@ RUN npm install && \
 	bower install ali-oss --allow-root && \
 	bower install jsonapi-datastore --allow-root
 
-RUN ember b -prod
+RUN ember b --environment production
 
 EXPOSE 4200
 
-ENTRYPOINT ["ember", "s"]
+ENTRYPOINT ["ember", "s", "--live-reload=false"]
