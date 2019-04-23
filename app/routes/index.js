@@ -1,13 +1,18 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 import RSVP from 'rsvp';
+
 export default Route.extend({
-    // beforeModel(/* transition */) {
-        // this.transitionTo('home'); // Implicitly aborts the on-going transition.
-    // }
-    // withLayout: false,
-    model() {
-        return RSVP.hash({
-            errorImg: 'https://bm-web.oss-cn-beijing.aliyuncs.com/icon_status_error%402x.png'
-        });
-    },
+	oauth_service: service(),
+	// withLayout: false,
+
+	beforeModel() {
+		// this.oauth_service.oauthOperation()
+	},
+
+	model() {
+		return RSVP.hash({
+			page: this.oauth_service.oauthOperation()
+        })
+	}
 });

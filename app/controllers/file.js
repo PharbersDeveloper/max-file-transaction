@@ -3,6 +3,9 @@ import { inject as service } from '@ember/service';
 import EmberObject, { computed } from '@ember/object';
 
 export default Controller.extend({
+	bmOss: service(),
+	cookies: service(),
+	oauth_service: service(),
 	upload_service: service(),
 	toastOptions: EmberObject.create({
         closeButton: false,
@@ -10,11 +13,17 @@ export default Controller.extend({
         progressBar: false,
         timeOut: '2000',
     }),
-	bmOss: service(),
-	token: service(),
+	// token: service(),
 	isRefresh: false,
 	files: computed('isRefresh', function()	{
-		return this.store.query('file', { 'accept': localStorage.getItem("account")})
+		let scope = this.get('cookies').read('scope');
+		let accept;
+		if(scope.indexOf('/') == -1) {
+			accept = scope.toLowerCase();
+		} else {
+			accept = scope.split(':')[1].replace(/[[\]]/g,"").toLowerCase();
+		}
+		return this.store.query('file', { 'accept': accept})
 	}),
 	downloadURI(url, name) {
 		fetch(url).then(response => {
@@ -60,10 +69,8 @@ export default Controller.extend({
 		},
 
 		signOut() {
-			let that = this;
-			that.token.clearAllCache();
-			window.console.log("test the log out: "+ localStorage.getItem("account"));
-			that.transitionToRoute('index');
+			this.oauth_service.removeAuth();
+			this.transitionToRoute('index')
 		},
 		download(param) {
 
