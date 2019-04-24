@@ -72,9 +72,8 @@ export default Controller.extend({
 			}
 		},
 
-		signOut() {
-			this.oauth_service.removeAuth();
-			this.transitionToRoute('index')
+		back() {
+			this.transitionToRoute('file');
 		},
 		download(param) {
 

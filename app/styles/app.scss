@@ -4,6 +4,7 @@
 //Routes
 @import 'index';
 @import 'file';
+@import 'ft-nav-top';
 
 html,
 body {
@@ -61,4 +62,12 @@ p {
             background-color: #DE350B
         }
     }
+}
+.file-page {
+    height: calc(100vh - 64px);
+    background-color: #fafbfc;
+    padding-top: 64px;
+}
+.file-full-page-outer {
+    height: 100vh;
 }

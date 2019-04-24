@@ -4,7 +4,7 @@ import RSVP from 'rsvp';
 
 export default Route.extend({
 	oauth_service: service(),
-	// withLayout: false,
+	withLayout: false,
 
 	beforeModel() {
 		// this.oauth_service.oauthOperation()
