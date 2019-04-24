@@ -48,7 +48,6 @@
         <table class="table stall-point-table bg-white">
             <thead class="table-head">
                 <th>文件名称</th>
-                <th>所属者</th>
                 <th>上传时间</th>
                 <th>下载次数</th>
                 <th>文件类型</th>
@@ -65,11 +64,12 @@
                                 <span class="ml-2 name">{{item.name}}</span>
                             {{/bp-layout}}
                         </td>
-                        <td>name</td>
                         <td>{{item.uploadtime}}</td>
-                        <td>88</td>
-                        <td>ppt</td>
-                        <td>24M</td>
+                        {{log item.uploadtime}}
+                        <td>{{item.downcount}}</td>
+                        <td>{{item.type}}</td>
+                        {{log item.type}}
+                        <td>{{item.size}}</td>
                         <td>{{item.describe}}</td>
                         <td><img src='/images/icon_download.png' alt="download" {{action 'download' item}}></td>
                     </tr>

@@ -6,4 +6,7 @@ export default DS.Model.extend({
     name: DS.attr('string'),
     uploadtime: DS.attr('string'),
     uuid: DS.attr('string'),
+    downcount: DS.attr('number'),
+    size: DS.attr('string'),
+    type: DS.attr('string'),
 });

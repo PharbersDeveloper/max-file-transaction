@@ -5,7 +5,9 @@
         <p>Pharbers</p>
     {{/bp-layout}}
     {{#bp-layout direction="row" cross="center" classNames="file-top-nav-right"}}
-         {{bp-icon icon='raised-hand'}}
+        <div {{action 'exit'}}>
+            {{bp-icon icon='raised-hand'}}
+        </div>
     {{/bp-layout}}
 {{/bp-layout}}
 {{yield}}

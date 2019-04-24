@@ -1,6 +1,6 @@
 {{#if showNavbar}}
    {{#bp-layout direction="col"}}
-        {{ft-nav-top}}
+        {{ft-nav-top exitSystem=(action 'exitSystem')}}
         {{#bp-layout direction="col" classNames="file-page"}}
             {{outlet}}
         {{/bp-layout}}
