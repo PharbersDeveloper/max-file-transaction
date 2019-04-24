@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import EmberObject, { computed } from '@ember/object';
 import { A } from '@ember/array';
+import {isEmpty} from '@ember/utils';
 
 export default Controller.extend({
 	bmOss: service(),
@@ -27,7 +28,21 @@ export default Controller.extend({
 		} else {
 			accept = scope.split(':')[1].replace(/[[\]]/g,"").toLowerCase();
 		}
-		return this.store.query('file', { 'accept': accept})
+		let result = this.store.query('file', { 'accept': accept});
+		result.then(res => {
+			this.set('filecount', res.length);
+			let sum = 0;
+			res.forEach(resu => {
+				if(!isEmpty(resu.size)) {
+					let size = resu.size;
+					let par = parseInt(size);
+					sum = sum + par;
+				}
+			})
+			let fixedsum = (sum/1024).toFixed(2);
+			this.set('filesize', fixedsum);
+		})
+		return result;
 	}),
 	downloadURI(url, name) {
 		fetch(url).then(response => {

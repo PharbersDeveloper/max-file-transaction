@@ -20,7 +20,7 @@
                     {{#if arr.firstObject.id}}
                         <p>{{ymValue}}</p>
                     {{else}}
-                        请选择
+                        团队成员 9
                     {{/if}}
                     {{bp-icon icon='down'}}
                 {{/dd.button}}
@@ -35,11 +35,11 @@
             {{/bp-dropdown}}
         {{#bp-layout direction='row' cross='center'}}
             {{#bp-layout direction='col' classNames='mr-3'}}
-                <p class="text-num">21</p>
+                <p class="text-num">{{filecount}}</p>
                 <p class="text-p-small">文件数量</p>
             {{/bp-layout}}
             {{#bp-layout direction='col' classNames='ml-3'}}
-                <p class="text-num">1G</p>
+                <p class="text-num">{{filesize}} G</p>
                 <p class="text-p-small">文件大小</p>
             {{/bp-layout}}
         {{/bp-layout}}
