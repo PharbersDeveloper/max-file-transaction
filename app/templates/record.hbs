@@ -1,0 +1,40 @@
+{{#bp-layout direction="col" classNames='p-4 file-container'}}
+    {{#bp-layout direction='row'}}
+		{{#bp-button type="link-subtle" click=(action 'back') classNames=""}}
+            返回
+    	{{/bp-button}}
+    {{/bp-layout}}
+    {{#bp-layout direction='row' main='between' cross='center' classNames='bg-white p-4 mt-4'}}
+        <p class="text-title">上传记录</p>
+    {{/bp-layout}}
+    {{#bp-layout direction='col' classNames='table-area'}}
+        <table class="table stall-point-table bg-white">
+            <thead class="table-head">
+                <th>名称</th>
+                <th>上传时间</th>
+                <th>文件类型</th>
+                <th>文件大小</th>
+                <th>下载次数</th>
+                <th>操作</th>
+            </thead>
+            <tbody class="table-body">
+                {{#each files as |item|}}
+                    <tr local-class="title m-2">
+                        <td>
+                            {{#bp-layout cross="center"}}
+                                <img src='/images/icon_generic_medium@3x.png' alt="" class="file-name-img">
+                                <span class="ml-2 name">{{item.name}}</span>
+                            {{/bp-layout}}
+                        </td>
+                        <td>{{item.uploadtime}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.size}}</td>
+                        <td>{{item.describe}}</td>
+                        <td><img src='/images/icon_download.png' alt="download" {{action 'download' item}}></td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{/bp-layout}}
+{{/bp-layout}}
+{{outlet}}

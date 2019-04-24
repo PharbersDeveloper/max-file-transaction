@@ -1,0 +1,13 @@
+{{#bp-layout direction="row" main="between" classNames="file-top-nav-outer pl-4 pr-4 bg-white"}}
+    {{#bp-layout direction="row" cross="center" classNames="chc-top-nav-left"}}
+        <img src="http://pharbers-images.oss-cn-beijing.aliyuncs.com/pharbers-max/logo_max.png
+" alt="" class="logo ml-3 mr-3">
+        <p>Pharbers</p>
+    {{/bp-layout}}
+    {{#bp-layout direction="row" cross="center" classNames="file-top-nav-right"}}
+        <div {{action 'exit'}}>
+            {{bp-icon icon='raised-hand'}}
+        </div>
+    {{/bp-layout}}
+{{/bp-layout}}
+{{yield}}

@@ -1,5 +1,12 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{!-- {{welcome-page}} --}}
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+{{#if showNavbar}}
+   {{#bp-layout direction="col"}}
+        {{ft-nav-top exitSystem=(action 'exitSystem')}}
+        {{#bp-layout direction="col" classNames="file-page"}}
+            {{outlet}}
+        {{/bp-layout}}
+    {{/bp-layout}}
+{{else}}
+    {{#bp-layout direction="col" classNames="file-full-page-outer"}}
+        {{outlet}}
+    {{/bp-layout}}
+{{/if}}

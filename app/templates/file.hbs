@@ -1,31 +1,58 @@
 {{#bp-layout direction="col" classNames='p-4 file-container'}}
     {{#bp-layout direction='row'}}
-        {{!-- <p class="text-p-small">返回</p> --}}
-        {{!-- {{#link-to 'index' classNames='text-p-small' }}
+		{{!-- {{#bp-button type="link-subtle" click=(action 'signOut') classNames=""}}
             返回
-        {{/link-to}} --}}
-		{{#bp-button type="link-subtle" click=(action 'signOut') classNames=""}}
-            返回
-    	{{/bp-button}}
+    	{{/bp-button}} --}}
     {{/bp-layout}}
-    {{#bp-layout direction='row' main='between' cross='center' classNames='bg-white p-4 mt-4 mb-4'}}
-        <p class="text-title">文件管理</p>
-        {{#bp-layout direction='row'}}
+    {{#bp-layout direction='row' main='between' cross='center' classNames='bg-white p-4'}}
+        <p class="text-title">文件</p>
+        {{#bp-layout direction='row' cross='center'}}
+            <p class="text-link mr-3" {{action 'linkToRecord'}}>上传记录</p>
 			<div>
 				<input type="file" name="file" id="file" onchange={{action 'uploadFile'}} value={{tmpFile}} class="inputfile"/>
             	<label for="file">上传文件</label>
 			</div>
-			{{!-- <div id="upload" class="upload-file" {{action 'uploadFile'}}>
-				上传文件
-			</div> --}}
+        {{/bp-layout}}
+    {{/bp-layout}}
+    {{#bp-layout direction='row' main='between' cross='center' classNames='bg-white p-4'}}
+        {{#bp-dropdown as |dd|}}
+                {{#dd.button }}
+                    {{#if arr.firstObject.id}}
+                        <p>{{ymValue}}</p>
+                    {{else}}
+                        团队成员 9
+                    {{/if}}
+                    {{bp-icon icon='down'}}
+                {{/dd.button}}
+                {{#dd.menu as |menu|}}
+                    {{#each arr as |item|}}
+                        {{#menu.option value=item.ym}}
+                            <img src={{item.img}} alt="" class="item-head mr-2">
+                            {{item.ym}}
+                        {{/menu.option}}
+                    {{/each}}
+                {{/dd.menu}}
+            {{/bp-dropdown}}
+        {{#bp-layout direction='row' cross='center'}}
+            {{#bp-layout direction='col' classNames='mr-3'}}
+                <p class="text-num">{{filecount}}</p>
+                <p class="text-p-small">文件数量</p>
+            {{/bp-layout}}
+            {{#bp-layout direction='col' classNames='ml-3'}}
+                <p class="text-num">{{filesize}} G</p>
+                <p class="text-p-small">文件大小</p>
+            {{/bp-layout}}
         {{/bp-layout}}
     {{/bp-layout}}
     {{#bp-layout direction='col' classNames='table-area'}}
         <table class="table stall-point-table bg-white">
             <thead class="table-head">
                 <th>文件名称</th>
-                <th>修改时间</th>
-                <th>描述</th>
+                <th>上传时间</th>
+                <th>下载次数</th>
+                <th>文件类型</th>
+                <th>文件大小</th>
+                <th>状态(最近一次时间)</th>
                 <th>操作</th>
             </thead>
             <tbody class="table-body">
@@ -38,6 +65,11 @@
                             {{/bp-layout}}
                         </td>
                         <td>{{item.uploadtime}}</td>
+                        {{log item.uploadtime}}
+                        <td>{{item.downcount}}</td>
+                        <td>{{item.type}}</td>
+                        {{log item.type}}
+                        <td>{{item.size}}</td>
                         <td>{{item.describe}}</td>
                         <td><img src='/images/icon_download.png' alt="download" {{action 'download' item}}></td>
                     </tr>
