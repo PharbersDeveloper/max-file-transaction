@@ -6,6 +6,7 @@ export default Service.extend({
     ajax: service(),
     router: service(),
 
+    groupName: '',
     version: 'v0',
     clientId: "5cbdac9bf4ce4352ecb082a2",
     clientSecret: '5c90db71eeefcc082c0823b2',
@@ -79,6 +80,9 @@ export default Service.extend({
                     cookies.write('token_type', response.token_type, options);
                     cookies.write('scope', response.scope, options);
                     cookies.write('expiry', response.expiry, options);
+
+                    this.set('groupName', response.scope.split("/")[1].split(":")[1]);
+
 					this.get('router').transitionTo('file');
 				});
 		} else {
@@ -94,22 +98,29 @@ export default Service.extend({
         
 		if(token != undefined && token != null && token != '') {
             tokenFlag = true;
-		}
-
-		if(scope != undefined && scope != null && scope != '') {
-			let result = scope.split("/")
-
-			if(result == null || result.length < 2) {
-				window.console.log("scope do not contained current project!");
-			} else {
-                let scopes = result[1].split(":")
-                scopes.forEach(elem => {
-                    if(elem === "FileUpAndDownLoad") {
-                        scopeFlag = true;
-                    }
-                })
+        }
+        
+        if(scope != undefined && scope != null && scope != '') {
+            let scopeString = scope.split("/")[1];
+            let scopeGroup = scopeString.split(":")[0];
+            if(scopeGroup == "FileUpAndDownLoad") {
+                scopeFlag = true;
             }
         }
+		// if(scope != undefined && scope != null && scope != '') {
+		// 	let result = scope.split("/")
+
+		// 	if(result == null || result.length < 2) {
+		// 		window.console.log("scope do not contained current project!");
+		// 	} else {
+        //         let scopes = result[1].split(":")
+        //         scopes.forEach(elem => {
+        //             if(elem === "FileUpAndDownLoad") {
+        //                 scopeFlag = true;
+        //             }
+        //         })
+        //     }
+        // }
 
         if(tokenFlag && scopeFlag) {
             return true;
@@ -119,6 +130,7 @@ export default Service.extend({
 	},
 
     removeAuth() {
+        this.set('groupName', '');
         let options = {
             domain: 'report.pharbers.com',
             path: '/',
@@ -137,7 +149,7 @@ export default Service.extend({
         }
         let scopesList = this.get('cookies').read('scopes_list');
         if (scopesList !== undefined) {
-            scopesList = scopesList.replace('FileUpAndDownLoad', '');
+            scopesList = scopesList.replace('FileUpAndDownLoad;', '');
             this.cookies.write('scopes_list', scopesList, options1);
         }
         

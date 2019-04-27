@@ -24,14 +24,15 @@ export default Controller.extend({
 		img: 'http://pharbers-images.oss-cn-beijing.aliyuncs.com/pharbers-max/logo_max.png'}]),
 	isRefresh: false,
 	files: computed('isRefresh', function()	{
-		let scope = this.get('cookies').read('scope');
-		let accept;
-		if(scope.indexOf('/') == -1) {
-			accept = scope.toLowerCase();
-		} else {
-			accept = scope.split(':')[1].replace(/[[\]]/g,"").toLowerCase();
-		}
-		let result = this.store.query('file', { 'accept': accept});
+		// let scope = this.get('cookies').read('scope');
+		// let accept;
+		// if(scope.indexOf('/') == -1) {
+		// 	accept = scope.toLowerCase();
+		// } else {
+		// 	accept = scope.split(':')[1].replace(/[[\]]/g,"").toLowerCase();
+		// }
+		// let result = this.store.query('file', { 'accept': accept});
+		let result = this.store.findAll('file');
 		result.then(res => {
 			this.set('filecount', res.length);
 			let sum = 0;
