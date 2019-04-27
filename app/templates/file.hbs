@@ -78,4 +78,16 @@
         </table>
     {{/bp-layout}}
 {{/bp-layout}}
-{{outlet}}
+
+{{#bp-modal open=mswitch backdropClose=false backdrop=true as |modal|}}
+    {{#modal.body}}
+        {{#bp-layout direction='col' cross="center" classNames=''}}
+            <p>即将开始下载，请稍候...</p>
+            {{#bp-layout direction='row' main="center" classNames=''}}
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            {{/bp-layout}}
+        {{/bp-layout}}
+    {{/modal.body}}
+{{/bp-modal}}

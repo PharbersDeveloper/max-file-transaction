@@ -9,6 +9,9 @@ export default Controller.extend({
 	cookies: service(),
 	oauth_service: service(),
 	upload_service: service(),
+
+	mswitch: false,
+
 	toastOptions: EmberObject.create({
         closeButton: false,
         positionClass: 'toast-top-center',
@@ -59,7 +62,9 @@ export default Controller.extend({
 				link.click();
 				document.body.removeChild(link);
 				// delete link;
+				this.set("mswitch", false) 
 		}).catch(error=> {
+			this.set("mswitch", false) 
 			window.console.log("failed. cause:", error)
 		})
 	},
@@ -92,7 +97,7 @@ export default Controller.extend({
 			this.transitionToRoute('index')
 		},
 		download(param) {
-
+			this.set("mswitch", true) 
 			let accept = param.accept;
 			let uuid = param.uuid;
 			let client = this.bmOss.get('ossClient');
