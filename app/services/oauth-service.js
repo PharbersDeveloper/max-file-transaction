@@ -95,15 +95,15 @@ export default Service.extend({
         let scopeFlag = false;
 		let token = this.get('cookies').read('token');
         let scope = this.get('cookies').read('scope');
-        
+
 		if(token != undefined && token != null && token != '') {
             tokenFlag = true;
         }
         
         if(scope != undefined && scope != null && scope != '') {
             let scopeString = scope.split("/")[1];
-            let scopeGroup = scopeString.split(":")[0];
-            if(scopeGroup == "FileUpAndDownLoad") {
+            let scopeGroup = scopeString.split(":")[1];
+            if(scopeGroup != "" && scopeGroup != undefined) {
                 scopeFlag = true;
             }
         }
