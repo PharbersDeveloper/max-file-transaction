@@ -69,7 +69,7 @@ export default Service.extend({
                     this.removeAuth();
                     let expiry = new Date(response.expiry);
                     let options = {
-                        domain: 'report.pharbers.com',
+                        domain: '.pharbers.com',
                         path: '/',
                         expires: expiry
                     }
@@ -81,7 +81,13 @@ export default Service.extend({
                     cookies.write('scope', response.scope, options);
                     cookies.write('expiry', response.expiry, options);
 
-                    this.set('groupName', response.scope.split("/")[1].split(":")[1]);
+                    response.scope.split("/")[1].split(",").forEach(elem => {
+                        let appScope = elem.split(":")[0];
+                        let scopeGroup = elem.split(":")[1];
+                        if(appScope == 'FileUpAndDownLoad' && scopeGroup != "" && scopeGroup != undefined) {
+                            this.set('groupName', scopeGroup);
+                        }
+                    });
 
 					this.get('router').transitionTo('file');
 				});
@@ -102,10 +108,14 @@ export default Service.extend({
         
         if(scope != undefined && scope != null && scope != '') {
             let scopeString = scope.split("/")[1];
-            let scopeGroup = scopeString.split(":")[1];
-            if(scopeGroup != "" && scopeGroup != undefined) {
-                scopeFlag = true;
-            }
+            let scopes = scopeString.split(",");
+            scopes.forEach(elem => {
+                let appScope = elem.split(":")[0];
+                let scopeGroup = elem.split(":")[1];
+                if(appScope == 'FileUpAndDownLoad' && scopeGroup != "" && scopeGroup != undefined) {
+                    scopeFlag = true;
+                }
+            });
         }
 		// if(scope != undefined && scope != null && scope != '') {
 		// 	let result = scope.split("/")
@@ -132,7 +142,7 @@ export default Service.extend({
     removeAuth() {
         this.set('groupName', '');
         let options = {
-            domain: 'report.pharbers.com',
+            domain: 'pharbers.com',
             path: '/',
         }
         this.cookies.clear("token", options)
@@ -143,15 +153,15 @@ export default Service.extend({
         this.cookies.clear("scope", options)
         this.cookies.clear("expiry", options)
 
-        let options1 = {
-            domain: '.pharbers.com',
-            path: '/',
-        }
-        let scopesList = this.get('cookies').read('scopes_list');
-        if (scopesList !== undefined) {
-            scopesList = scopesList.replace('FileUpAndDownLoad;', '');
-            this.cookies.write('scopes_list', scopesList, options1);
-        }
+        // let options1 = {
+        //     domain: '.pharbers.com',
+        //     path: '/',
+        // }
+        // let scopesList = this.get('cookies').read('scopes_list');
+        // if (scopesList !== undefined) {
+        //     scopesList = scopesList.replace('FileUpAndDownLoad;', '');
+        //     this.cookies.write('scopes_list', scopesList, options1);
+        // }
         
         window.console.log("clear cookies!");
     },
