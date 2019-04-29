@@ -119,7 +119,7 @@ export default Service.extend({
             scope.split("/")[1].split(",").forEach(elem => {
                 let appScope = elem.split(":")[0];
                 let scopeGroup = elem.split(":")[1];
-                if(appScope == 'MAXBI' && scopeGroup != "" && scopeGroup != undefined) {
+                if(appScope == 'FileUpAndDownLoad' && scopeGroup != "" && scopeGroup != undefined) {
                     this.set('groupName', scopeGroup.split('#')[0]);
                 }
             });
