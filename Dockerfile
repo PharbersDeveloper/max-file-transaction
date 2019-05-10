@@ -19,7 +19,7 @@ RUN npm update && \
 
 WORKDIR /app
 
-LABEL filetransaction.version=0.1.0
+LABEL filetransaction.version=0.1.5
 
 RUN git clone https://github.com/PharbersDeveloper/max-file-transaction.git && \
 	git clone https://github.com/PharbersDeveloper/BP-Components.git 
